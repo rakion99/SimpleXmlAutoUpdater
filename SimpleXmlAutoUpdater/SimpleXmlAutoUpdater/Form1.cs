@@ -48,7 +48,11 @@ namespace SimpleXmlAutoUpdater
                 Position = 0
             };
 
-            return BitConverter.ToString(System.Security.Cryptography.SHA384.Create().ComputeHash(filestream)).Replace("-", string.Empty);
+            var filehash = BitConverter.ToString(System.Security.Cryptography.SHA384.Create().ComputeHash(filestream)).Replace("-", string.Empty);
+
+            filestream.Close();
+
+            return filehash;
         }
 
         private void CheckforupdatesBTN_Click(object sender, EventArgs e) => CheckForUpdates();
